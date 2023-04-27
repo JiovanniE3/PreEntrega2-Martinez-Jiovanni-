@@ -88,7 +88,7 @@ function torre() {
                     break;
                 case 3:
 
-                    cerrarSesion (); 
+                    cerrarSesion();
 
                     break;
 
@@ -124,15 +124,15 @@ function tienda() {
 
                 case 1:
 
-                    if (arrayClaseSelected.insignias >=10 ) {
+                    if (arrayClaseSelected.insignias >= 10) {
 
-                        arrayClaseSelected.insignias= arrayClaseSelected.insignias - 10 ;
-                        arrayClaseSelected.vida= arrayClaseSelected.vida + 50;
+                        arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
+                        arrayClaseSelected.vida = arrayClaseSelected.vida + 50;
                         alert(`Felicidades, haz mejorado tu vida actual! Regresando con Banshee...
                         \nTus estadisticas actuales son: \nVida : ${arrayClaseSelected.vida} \nDaño: ${arrayClaseSelected.damage}`);
-                        
+
                         tienda();
-                    }else{
+                    } else {
 
                         alert("No tienes insignias suficientes!, regresando con Banshee");
 
@@ -142,15 +142,15 @@ function tienda() {
                     break;
                 case 2:
 
-                    if (arrayClaseSelected.insignias >=10 ) {
+                    if (arrayClaseSelected.insignias >= 10) {
 
-                        arrayClaseSelected.insignias= arrayClaseSelected.insignias - 10;
-                        arrayClaseSelected.damage= arrayClaseSelected.damage + 50;
+                        arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
+                        arrayClaseSelected.damage = arrayClaseSelected.damage + 50;
                         alert(`Felicidades, haz mejorado tu daño actual! Regresando con Banshee...
                         \nTus estadisticas actuales son: \nVida Maxima: ${arrayClaseSelected.vida} \nDaño: ${arrayClaseSelected.damage}`);
 
                         tienda();
-                    }else{
+                    } else {
 
                         alert("No tienes insignias suficientes!, regresando con Banshee");
 
@@ -177,8 +177,8 @@ function tienda() {
     }
 }
 
-function expedicion(){
-    
+function expedicion() {
+
     let opcion = parseInt(prompt(`Hola Guardian soy Zavala, en las expediciones podras pelear con diferentes criaturas y ganar insignias tras cada victoria, hazte con muchas de ellas para comprar mejoras y poder desafiar a Oryx.
     \n1) Iniciar expedicion\n2) Desafiar a Oryx\n3) Regresar a la torre
     \nTus estadisticas actuales son: Vida actual: ${arrayClaseSelected.vida} Daño: ${arrayClaseSelected.damage} `));
@@ -202,7 +202,7 @@ function expedicion(){
 
                     break;
                 case 2:
-                    
+
                     bossOryx();
 
                     break;
@@ -225,204 +225,222 @@ function expedicion(){
 }
 
 
-function combate (){
+function combate() {
 
-        let vidaAcolito= 300;
-        let damageAcolito= 10;
+    let vidaAcolito = 300;
+    let damageAcolito = 10;
 
-        while (vidaAcolito > 0) {
-            
+    while (vidaAcolito > 0) {
+
+        if (arrayClaseSelected.vida > 0) {
+
             let opcion = parseInt(prompt(`Un Acolito de la Colmena te Enfrenta! (Vida: ${vidaAcolito} Daño: ${damageAcolito})
             \n1) Atacar (100% de daño infligido, Posibilidad de critico)\n2) Defender ( 50% de daño infligido, Recuperas +10 de vida)\n3) Huir (Volver a la torre)
             \nTus estadisticas actuales son: Vida actual: ${arrayClaseSelected.vida} Daño: ${arrayClaseSelected.damage} `));
 
-        if (isNaN(opcion)) {
+            if (isNaN(opcion)) {
 
-            alert("Elige la opcion de la accion deseada, vuelve a intentarlo");
-    
-        } else {
-    
-            if (opcion > 0 && opcion < 4) {
-    
-                switch (opcion) {
-    
-                    case 1:
-
-                        numeroAleatorio ();
-
-                        if (numeroAleatorio () > 7){
-
-                            alert(`Le haz realizado un golpe critico ${arrayClaseSelected.damage * 2} al Acolito!
-                            \nEl Acolito ataca! te quito ${damageAcolito} de vida`);
-                            vidaAcolito = vidaAcolito - ( arrayClaseSelected.damage * 2);
-                            arrayClaseSelected.vida = arrayClaseSelected.vida - damageAcolito;
-
-                        } else if ( numeroAleatorio () > 3 ) {
-
-                            alert(`Le haz infligido ${arrayClaseSelected.damage} al Acolito!
-                            \nEl Acolito ataca! te quito ${damageAcolito} de vida`);
-                            vidaAcolito = vidaAcolito - arrayClaseSelected.damage;
-                            arrayClaseSelected.vida = arrayClaseSelected.vida - damageAcolito;
-
-                        } else{
-
-                            alert(`El Acolito a usado un escudo y te a negado tu daño 
-                            \nEl Acolito ataca! te quito ${damageAcolito} de vida`);
-                            vidaAcolito = vidaAcolito - arrayClaseSelected.damage;
-                            arrayClaseSelected.vida = arrayClaseSelected.vida - damageAcolito;
-                        }
-
-
-                        break;
-                    case 2:
-
-                         numeroAleatorio ();
-
-                            if (numeroAleatorio () > 7){
-
-                            alert(`Haz bloqueado con exito un golpe y le haz realizado  ${arrayClaseSelected.damage} al Acolito!
-                            \nRegeneras 20 de vida!`);
-                            vidaAcolito = vidaAcolito - arrayClaseSelected.damage;
-                            arrayClaseSelected.vida = arrayClaseSelected.vida + 20;
-
-                        } else if ( numeroAleatorio () > 3 ) {
-
-                            alert(`Le haz infligido ${arrayClaseSelected.damage / 2} al Acolito!
-                            \nBloqueas el Ataque del Acolito y te curas 10 de vida!`);
-                            vidaAcolito = vidaAcolito - (arrayClaseSelected.damage / 2);
-                            arrayClaseSelected.vida = arrayClaseSelected.vida + 10;
-
-                        } else{
-
-                            alert(`El Acolito te esquiva y te hace daño critico! 
-                            \nEl Acolito ataca y te quita ${damageAcolito * 2} de vida`);
-                            arrayClaseSelected.vida = arrayClaseSelected.vida - (damageAcolito * 2);
-                        }
-        
-                        break;
-                    case 3:
-                        
-                        vidaAcolito= 0;
-                        torre();
-                        break;
-    
-                }
-    
-            } else {
-    
                 alert("Elige la opcion de la accion deseada, vuelve a intentarlo");
-    
-    
+
+            } else {
+
+                if (opcion > 0 && opcion < 4) {
+
+
+                    switch (opcion) {
+
+                        case 1:
+
+                            numeroAleatorio();
+
+                            if (numeroAleatorio() > 7) {
+
+                                alert(`Le haz realizado un golpe critico ${arrayClaseSelected.damage * 2} al Acolito!
+                            \nEl Acolito ataca! te quito ${damageAcolito} de vida`);
+                                vidaAcolito = vidaAcolito - (arrayClaseSelected.damage * 2);
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - damageAcolito;
+
+                            } else if (numeroAleatorio() > 3) {
+
+                                alert(`Le haz infligido ${arrayClaseSelected.damage} al Acolito!
+                            \nEl Acolito ataca! te quito ${damageAcolito} de vida`);
+                                vidaAcolito = vidaAcolito - arrayClaseSelected.damage;
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - damageAcolito;
+
+                            } else {
+
+                                alert(`El Acolito a usado un escudo y te a negado tu daño 
+                            \nEl Acolito ataca! te quito ${damageAcolito} de vida`);
+                                vidaAcolito = vidaAcolito - arrayClaseSelected.damage;
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - damageAcolito;
+                            }
+
+
+                            break;
+                        case 2:
+
+                            numeroAleatorio();
+
+                            if (numeroAleatorio() > 7) {
+
+                                alert(`Haz bloqueado con exito un golpe y le haz realizado  ${arrayClaseSelected.damage} al Acolito!
+                            \nRegeneras 20 de vida!`);
+                                vidaAcolito = vidaAcolito - arrayClaseSelected.damage;
+                                arrayClaseSelected.vida = arrayClaseSelected.vida + 20;
+
+                            } else if (numeroAleatorio() > 3) {
+
+                                alert(`Le haz infligido ${arrayClaseSelected.damage / 2} al Acolito!
+                            \nBloqueas el Ataque del Acolito y te curas 10 de vida!`);
+                                vidaAcolito = vidaAcolito - (arrayClaseSelected.damage / 2);
+                                arrayClaseSelected.vida = arrayClaseSelected.vida + 10;
+
+                            } else {
+
+                                alert(`El Acolito te esquiva y te hace daño critico! 
+                            \nEl Acolito ataca y te quita ${damageAcolito * 2} de vida`);
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - (damageAcolito * 2);
+                            }
+
+                            break;
+                        case 3:
+
+                            vidaAcolito = 0;
+                            torre();
+                            break;
+
+                    }
+
+                } else {
+
+                    alert("Elige la opcion de la accion deseada, vuelve a intentarlo");
+
+
+                }
             }
+
+
+
+
+        } else {
+            alert("Haz muerto...\nFIN DEL JUEGO");
+            cerrarSesion();
         }
-          }
-        
-        
-        alert("Haz derrotado al Acolito! Ganaste 100 Insignias! mejora tu equipo para derrotar a Oryx!\nVolviendo a la torre...");
-        arrayClaseSelected.insignias = arrayClaseSelected.insignias + 100;
-        torre();
-        
+
+    }
+    alert("Haz derrotado al Acolito! Ganaste 100 Insignias! mejora tu equipo para derrotar a Oryx!\nVolviendo a la torre...");
+    arrayClaseSelected.insignias = arrayClaseSelected.insignias + 100;
+    torre();
 }
 
-function bossOryx (){
+function bossOryx() {
 
-    let vidaOryx= 10000;
-    let damageOryx= 100;
+    let vidaOryx = 10000;
+    let damageOryx = 100;
 
-    while (vidaOryx> 0) {
-        
-        let opcion = parseInt(prompt(`Oryx se eleva listo para una batalla a muerte! (Vida: ${vidaOryx} Daño: ${damageOryx})
+    while (vidaOryx > 0) {
+
+        if (arrayClaseSelected.vida > 0) {
+
+            let opcion = parseInt(prompt(`Oryx se eleva listo para una batalla a muerte! (Vida: ${vidaOryx} Daño: ${damageOryx})
         \n1) Atacar (100% de daño infligido, Posibilidad de critico)\n2) Defender ( 50% de daño infligido, Recuperas +10 de vida)\n3) Huir (Volver a la torre)
         \nTus estadisticas actuales son: Vida actual: ${arrayClaseSelected.vida} Daño: ${arrayClaseSelected.damage} `));
 
-    if (isNaN(opcion)) {
+            if (isNaN(opcion)) {
 
-        alert("Elige la opcion de la accion deseada, vuelve a intentarlo");
+                alert("Elige la opcion de la accion deseada, vuelve a intentarlo");
 
-    } else {
+            } else {
 
-        if (opcion > 0 && opcion < 4) {
+                if (opcion > 0 && opcion < 4) {
 
-            switch (opcion) {
+                    switch (opcion) {
 
-                case 1:
+                        case 1:
 
-                    numeroAleatorio ();
+                            numeroAleatorio();
 
-                    if (numeroAleatorio () > 7){
+                            if (numeroAleatorio() > 7) {
 
 
-                        alert(`Le haz realizado un golpe critico de ${arrayClaseSelected.damage * 2} a Oryx!
+                                alert(`Le haz realizado un golpe critico de ${arrayClaseSelected.damage * 2} a Oryx!
                         \nOryx ataca! te quito ${damageOryx} de vida`);
-                        vidaOryx = vidaOryx - ( arrayClaseSelected.damage * 2);
-                        arrayClaseSelected.vida = arrayClaseSelected.vida - damageOryx;
+                                vidaOryx = vidaOryx - (arrayClaseSelected.damage * 2);
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - damageOryx;
 
-                    } else if ( numeroAleatorio () > 3 ) {
+                            } else if (numeroAleatorio() > 3) {
 
-                        alert(`Le haz infligido ${arrayClaseSelected.damage} a Oryx!
+                                alert(`Le haz infligido ${arrayClaseSelected.damage} a Oryx!
                         \nOryx ataca! te quito ${damageOryx} de vida`);
-                        vidaOryx = vidaOryx - arrayClaseSelected.damage;
-                        arrayClaseSelected.vida = arrayClaseSelected.vida - damageOryx;
+                                vidaOryx = vidaOryx - arrayClaseSelected.damage;
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - damageOryx;
 
-                    } else{
+                            } else {
 
-                        alert(`Oryx a su espada para bloquearte y te a negado tu daño 
+                                alert(`Oryx a su espada para bloquearte y te a negado tu daño 
                         \nOryx ataca! te quito ${damageOryx} de vida`);
-                        vidaOryx = vidaOryx - arrayClaseSelected.damage;
-                        arrayClaseSelected.vida = arrayClaseSelected.vida - damageOryx;
-                    }
+                                vidaOryx = vidaOryx - arrayClaseSelected.damage;
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - damageOryx;
+                            }
 
 
-                    break;
-                case 2:
+                            break;
+                        case 2:
 
-                     numeroAleatorio ();
+                            numeroAleatorio();
 
-                        if (numeroAleatorio () > 7){
+                            if (numeroAleatorio() > 7) {
 
-                        alert(`Haz bloqueado con exito un golpe y le haz realizado  ${arrayClaseSelected.damage * 2} a Oryx!
+                                alert(`Haz bloqueado con exito un golpe y le haz realizado  ${arrayClaseSelected.damage * 2} a Oryx!
                         \nRegeneras 200 de vida!`);
-                        vidaOryx = vidaOryx - arrayClaseSelected.damage;
-                        arrayClaseSelected.vida = arrayClaseSelected.vida + 200;
+                                vidaOryx = vidaOryx - arrayClaseSelected.damage;
+                                arrayClaseSelected.vida = arrayClaseSelected.vida + 200;
 
-                    } else if ( numeroAleatorio () > 3 ) {
+                            } else if (numeroAleatorio() > 3) {
 
-                        alert(`Le haz infligido ${arrayClaseSelected.damage / 2} a Oryx!
+                                alert(`Le haz infligido ${arrayClaseSelected.damage / 2} a Oryx!
                         \nBloqueas el Ataque a Oryx y te curas 100 de vida!`);
-                        vidaOryx = vidaOryx - (arrayClaseSelected.damage / 2);
-                        arrayClaseSelected.vida = arrayClaseSelected.vida + 100;
+                                vidaOryx = vidaOryx - (arrayClaseSelected.damage / 2);
+                                arrayClaseSelected.vida = arrayClaseSelected.vida + 100;
 
-                    } else{
+                            } else {
 
-                        alert(`El Acolito te esquiva y te hace daño critico! 
+                                alert(`El Acolito te esquiva y te hace daño critico! 
                         \nOryx ataca y te quita ${damageOryx * 2} de vida`);
-                        arrayClaseSelected.vida = arrayClaseSelected.vida - (damageOryx * 2);
-                    }
-    
-                    break;
-                case 3:
-                    
-                    vidaOryx= 0;
-                    torre();
-                    break;
+                                arrayClaseSelected.vida = arrayClaseSelected.vida - (damageOryx * 2);
+                            }
 
+                            break;
+                        case 3:
+
+                            vidaOryx = 0;
+                            torre();
+                            break;
+
+                    }
+
+                } else {
+
+                    alert("Elige la opcion de la accion deseada, vuelve a intentarlo");
+
+
+                }
             }
 
+
         } else {
-
-            alert("Elige la opcion de la accion deseada, vuelve a intentarlo");
-
-
+            alert("Haz muerto...\nFIN DEL JUEGO");
+            cerrarSesion();
         }
+
     }
-      }
     alert("Haz derrotado a Oryx! El Viajero estara a salvo... hasta que la colmena regrese. \nFIN DEL JUEGO");
     cerrarSesion();
 }
 
 
 function numeroAleatorio() {
-    return Math.floor(Math.random() * 11); 
+    return Math.floor(Math.random() * 11);
 }
 
 function cerrarSesion() {
