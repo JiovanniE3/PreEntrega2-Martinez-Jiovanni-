@@ -232,7 +232,7 @@ function combate() {
 
     while (vidaAcolito > 0) {
 
-        if (arrayClaseSelected.vida > 0) {
+        if (arrayClaseSelected.vida > 1) {
 
             let opcion = parseInt(prompt(`Un Acolito de la Colmena te Enfrenta! (Vida: ${vidaAcolito} Daño: ${damageAcolito})
             \n1) Atacar (100% de daño infligido, Posibilidad de critico)\n2) Defender ( 50% de daño infligido, Recuperas +10 de vida)\n3) Huir (Volver a la torre)
@@ -340,7 +340,7 @@ function bossOryx() {
 
     while (vidaOryx > 0) {
 
-        if (arrayClaseSelected.vida > 0) {
+        if (arrayClaseSelected.vida > 1) {
 
             let opcion = parseInt(prompt(`Oryx se eleva listo para una batalla a muerte! (Vida: ${vidaOryx} Daño: ${damageOryx})
         \n1) Atacar (100% de daño infligido, Posibilidad de critico)\n2) Defender ( 50% de daño infligido, Recuperas +10 de vida)\n3) Huir (Volver a la torre)
