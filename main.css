@@ -1,0 +1,608 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    overflow: hidden;
+}
+
+main {
+    width: 1000px;
+    height: 700px;
+}
+
+.actionBar {
+    width: 100%;
+    height: 70%;
+    border-radius: 15px;
+    border: 3px solid aliceblue;
+    position: relative;
+    overflow: hidden;
+}
+
+.bg {
+    width: 100%;
+}
+
+.aS {
+    height: 100%;
+}
+
+.aS img {
+    width: 100%;
+}
+
+.startbtn {
+    width: 300px;
+    height: auto;
+    font-size: 30px;
+    text-align: center;
+    position: absolute;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.796);
+    padding: 10px;
+    font-family: 'Bruno Ace', cursive;
+    border-radius: 15px;
+    border: 3px solid aliceblue;
+    color: aliceblue;
+    bottom: 100px;
+    left: 350px;
+}
+
+.auno {
+    height: 100%;
+    background-image: url('./imagenes/startbg1.png');
+    background-position-y: bottom;
+    background-size: 100%;
+}
+
+.ados {
+    background-image: url('./imagenes/espacio.jpg');
+    background-size: 150%;
+    animation: bg-translate 120s infinite linear;
+    background-position: 0 0;
+}
+
+
+
+
+@keyframes bg-translate {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.pj {
+    text-align: center;
+    width: auto;
+    height: auto;
+    color: aliceblue;
+    position: absolute;
+    cursor: pointer;
+}
+
+.status {
+    width: 200px;
+    margin: 10px auto;
+    background-color: rgba(0, 0, 0, 0.796);
+    padding: 15px;
+    font-family: 'Bruno Ace', cursive;
+    border-radius: 15px;
+    border: 3px solid aliceblue;
+
+}
+
+.Cazador {
+    left: 360px;
+    top: 150px;
+}
+
+.Cazador img {
+    width: auto;
+    height: 390px;
+    z-index: 3;
+}
+
+.Hechicero {
+    right: 90px;
+    top: 95px;
+}
+
+.Hechicero img {
+    width: auto;
+    height: 390px;
+    z-index: 2;
+}
+
+.Titan {
+    left: 5px;
+    top: 90px;
+}
+
+.Titan img {
+    width: auto;
+    height: 390px;
+    z-index: 1;
+}
+
+
+.shop {
+    text-align: center;
+    width: auto;
+    height: auto;
+    color: aliceblue;
+    position: absolute;
+    right: 250px;
+    bottom: 35px;
+    cursor: pointer;
+}
+
+.shop img {
+    width: 100px;
+    height: auto;
+}
+
+.shop p {
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    margin-bottom: 20px;
+    padding: 5px;
+    text-align: center;
+    color: aliceblue;
+    border-radius: 15px;
+}
+
+.pve {
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 275px;
+    bottom: 35px;
+    cursor: pointer;
+}
+
+.pve p {
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    margin-bottom: 20px;
+    padding: 5px;
+    text-align: center;
+    color: aliceblue;
+    border-radius: 15px;
+}
+
+.pve img {
+    width: 150px;
+    height: auto;
+}
+
+.graphicBar {
+    width: 100%;
+    height: 30%;
+    border-radius: 15px;
+    border: 3px solid aliceblue;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+}
+
+.gdos {
+    background-image: url('./imagenes/mainactionbg.png');
+    background-position-y: bottom;
+    background-size: 100%;
+}
+
+.graphicBar img {
+    border-radius: 20px;
+    border: 3px solid aliceblue;
+    padding: 10px;
+}
+
+.items {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 40%;
+    transform: translateX(-100px);
+
+}
+
+.items div {
+    display: flex;
+    flex-direction: column;
+}
+
+.items div p {
+    background-color: black;
+    border-radius: 20px;
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    text-align: center;
+    color: aliceblue;
+    font-size: 10px;
+    padding: 3px;
+    margin-top: 10px;
+}
+
+.pjImg {
+    transform: translateY(-10px);
+    width: 150px;
+    background-color: rgb(42, 41, 41);
+
+}
+
+.item {
+    width: 80px;
+    background-color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.playerStatus {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 40%;
+    position: relative;
+}
+
+
+.ashop {
+
+    background-image: url('./imagenes/shop.png');
+    background-position-y: bottom;
+    background-size: cover;
+
+
+}
+
+.shopMenu {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 90%;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.695);
+    border-radius: 20px;
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    color: aliceblue;
+    padding: 0px 10px;
+    font-size: 13px;
+    position: absolute;
+    left: 100px;
+    top: 20px
+}
+
+.shopItems {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.coinsMount {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.coinsMount img {
+    width: 30px;
+}
+
+.vendorMsg {
+    text-align: center;
+}
+
+.shopDescription {
+    width: 145px;
+    text-align: center;
+}
+
+.shopItems img {
+    width: 50px;
+}
+
+.btnShop {
+    border-radius: 20px;
+    border: 3px solid aliceblue;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.expBg {
+    background-image: url('./imagenes/exp.png');
+    background-position-y: bottom;
+    background-size: 100%;
+}
+
+.pveMenu {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 700px;
+    font-family: 'Bruno Ace', cursive;
+    color: aliceblue;
+    border-radius: 15px;
+    position: absolute;
+    top: 100px;
+    left: 150px;
+}
+
+.pveOpc {
+    width: 150px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+
+.pveOpc p {
+    background-color: rgba(0, 0, 0, 0.695);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border: 3px solid aliceblue;
+    border-radius: 15px;
+}
+
+.pveOpc img {
+    margin-top: 10px;
+    width: 120px;
+    cursor: pointer;
+}
+
+.health-bar {
+    font-family: 'Bruno Ace', cursive;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    position: absolute;
+
+}
+
+.statusHeal {
+    width: 200px;
+    height: 30px;
+    transform: translateY(10px);
+    bottom: 0px;
+    left: 100px;
+}
+
+
+.health-bar-fill {
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.health-bar-text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.health-bar-total {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.health-bar-enemy {
+    font-family: 'Bruno Ace', cursive;
+    width: 200px;
+    height: 30px;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    transform: translateY(-40px);
+}
+
+.health-bar-fill-enemy {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(168, 13, 13);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.health-bar-text-enemy {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.health-bar-total-enemy {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.enemy {
+    position: absolute;
+    bottom: 40px;
+    right: 100px;
+}
+
+.pveBg {
+    background-image: url('./imagenes/pveBg.jpg');
+    background-position-y: bottom;
+    background-size: 100%;
+}
+
+.guardian {
+    position: absolute;
+    bottom: 40px;
+    left: 100px;
+}
+
+.guardian {
+    position: absolute;
+    bottom: 40px;
+    left: 100px;
+}
+
+.guardian img {
+    height: 200px;
+}
+
+.combatLog {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 100px;
+    top: 40px;
+    width: 800px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.695);
+    border-radius: 20px;
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    color: aliceblue;
+
+}
+
+.numBox {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-size: 11px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 15px;
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    color: aliceblue;
+}
+
+.attackNum {
+    width: 60px;
+    height: 30px;
+    left: 20px;
+    top: 0px;
+    transform: translateY(-25px);
+}
+
+.potsNum {
+    width: 35px;
+    height: 35px;
+    right: 100px;
+    bottom: 25px;
+}
+
+.boss img {
+    width: 300px;
+}
+
+.bossBg {
+    background-image: url("./imagenes/bossbg.png");
+}
+
+.creditsArea {
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
+.credits {
+    width: 600px;
+    height: 50px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.582);
+    border-radius: 15px;
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    color: aliceblue;
+}
+
+.c1 {
+    font-size: 20px;
+    height: 80px;
+}
+
+.query {
+    display: none;
+    width: 90%;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.582);
+    border-radius: 15px;
+    border: 3px solid aliceblue;
+    font-family: 'Bruno Ace', cursive;
+    color: aliceblue;
+}
+
+@media screen and (max-width: 1023px),
+screen and (max-height: 699px) {
+    body {
+        background-image: url("./imagenes/bgnone.jpg");
+        background-position: center;
+    }
+
+    .query {
+        display: block;
+    }
+
+    main {
+        display: none;
+    }
+}
