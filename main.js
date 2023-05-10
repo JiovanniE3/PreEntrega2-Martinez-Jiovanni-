@@ -1,14 +1,3 @@
-function numeroAleatorio() {
-    return Math.floor(Math.random() * 11);
-}
-
-function cerrarSesion() {
-    alert("Gracias por jugar Destiny RPG, created by: JiovanniE3 :D");
-    process.exit();
-}
-
-
-
 class Personaje {
     constructor(id, clase, vidaMax, vidaAct, damage, insignias, pots, imgPerfil, imgFullBody) {
         this.id = id;
@@ -20,7 +9,6 @@ class Personaje {
         this.pots = pots;
         this.imgPerfil = imgPerfil;
         this.imgFullBody = imgFullBody;
-
     }
 }
 
@@ -34,7 +22,6 @@ class Enemy {
     }
 }
 
-
 const titan = new Personaje(1, "Titan", 150, 150, 100, 0, 0, "./imagenes/titanP.png", "./imagenes/titan1.png");
 const cazador = new Personaje(2, "Cazador", 100, 100, 150, 0, 0, "./imagenes/cazadorP.png", "./imagenes/cazador.png");
 const hechicero = new Personaje(3, "Hechicero", 50, 50, 250, 0, 0, "./imagenes/hechieroP.png",
@@ -42,6 +29,8 @@ const hechicero = new Personaje(3, "Hechicero", 50, 50, 250, 0, 0, "./imagenes/h
 
 const arrayClases = [];
 let arrayEnemy;
+let arrayClaseSelected = {};
+
 
 let opcion = 0;
 let selectedId = [];
@@ -49,6 +38,7 @@ let selectedId = [];
 arrayClases.push(hechicero);
 arrayClases.push(titan);
 arrayClases.push(cazador);
+
 
 
 const mainElement = document.querySelector('main');
@@ -113,9 +103,34 @@ menuStart.addEventListener('click', () => {
 
             }
 
-            let arrayClaseSelected = arrayClases.find(item => item.id === opcion);
+            arrayClaseSelected = arrayClases.find(item => item.id === opcion);
 
-            let menuInt = `
+
+            torre();
+
+        });
+    });
+});
+
+if (localStorage.getItem("arrayClaseSelected")) {
+    arrayClaseSelected = JSON.parse(localStorage.getItem("arrayClaseSelected"));
+    torre();
+}
+
+function numeroAleatorio() {
+    return Math.floor(Math.random() * 11);
+}
+
+function cerrarSesion() {
+    alert("Gracias por jugar Destiny RPG, created by: JiovanniE3 :D");
+    process.exit();
+}
+
+
+function torre() {
+
+
+    let menuInt = `
 <div class="actionBar ados">
     <img class="bg" src="./imagenes/menuInt.png" alt="">
     <div class="shop">
@@ -162,7 +177,7 @@ menuStart.addEventListener('click', () => {
 
 </div>`;
 
-            let menuExp = `
+    let menuExp = `
 <div class="actionBar expBg">
 
     <div class="pveMenu">
@@ -212,7 +227,7 @@ menuStart.addEventListener('click', () => {
 
 </div>`;
 
-            let incursionMenu = `
+    let incursionMenu = `
 <div class="actionBar pveBg">
 
     <div class="combatLog">Un Caval te enfrenta</div>
@@ -264,22 +279,21 @@ menuStart.addEventListener('click', () => {
     </div>
 
 </div> `;
-            let creditos = `
+    let creditos = `
 <div class="actionBar creditsArea ados">
     <p class="credits c1">Haz derrotado a Savathun, el Viajero estara a salvo... hasta que vuelva la colmena...</p>
     <p class="credits">Gracias por jugar Desitny RPG, Created by: JiovanniE :D</p>
 </div>
 `;
 
-            let dead = `
+    let dead = `
 <div class="actionBar creditsArea ados">
     <p class="credits c1">Haz muerto...</p>
     <p class="credits">Gracias por jugar Desitny RPG, Created by: JiovanniE :D</p>
 </div>
 `;
 
-            let bossMenu = `
-
+    let bossMenu = `
 <div class="actionBar bossBg">
 
     <div class="combatLog">Savathun aparece para una batalla a muerte...</div>
@@ -333,11 +347,7 @@ menuStart.addEventListener('click', () => {
 </div> `;
 
 
-            torre();
-
-            function torre() {
-
-                let menuShop = `
+    let menuShop = `
 <div class="actionBar ashop">
     <div class="shopMenu">
         <div class="shopItems">
@@ -399,556 +409,590 @@ menuStart.addEventListener('click', () => {
 
     </div>`;
 
+    let reward = `        
+    <div id="reward" class="rewardMsg">
+        <p class="rewardDesc"> Haz acabado con el Caval! Conseguiste 100 ingsignias a Eris podrian interesarle cambiartelas por alguna mejora...</p>
+        <p id="reward" class="rewardBtn" > Volver a la Torre </p>
+    </div>`;
 
-                mainElement.innerHTML = menuInt;
+    localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
 
-                const buySelectors = document.querySelectorAll('.btnInt');
+    mainElement.innerHTML = menuInt;
 
-                console.log(arrayClaseSelected);
+    const buySelectors = document.querySelectorAll('.btnInt')
 
-                function potUsed() {
-                    arrayClaseSelected.pots = arrayClaseSelected.pots - 1;
-                }
+    function potUsed() {
+        arrayClaseSelected.pots = arrayClaseSelected.pots - 1;
+    }
 
-                function attackNumMsg() {
+    function attackNumMsg() {
 
-                    let numDmg = document.querySelector('.attackNum');
+        let numDmg = document.querySelector('.attackNum');
 
-                    numDmg.textContent = `${arrayClaseSelected.damage} `;
-                }
+        numDmg.textContent = `${arrayClaseSelected.damage} `;
+    }
 
-                function potsNumMsg() {
+    function potsNumMsg() {
 
-                    let numPots = document.querySelector('.potsNum');
+        let numPots = document.querySelector('.potsNum');
 
-                    numPots.textContent = `${arrayClaseSelected.pots} `;
-                }
+        numPots.textContent = `${arrayClaseSelected.pots} `;
+    }
 
-                function insigniasMsg() {
+    function insigniasMsg() {
 
-                    let numInsignias = document.querySelector('.insigniasMsg');
+        let numInsignias = document.querySelector('.insigniasMsg');
 
-                    numInsignias.textContent = `Insignias actuales : ${arrayClaseSelected.insignias} `;
-                }
+        numInsignias.textContent = `Insignias actuales : ${arrayClaseSelected.insignias} `;
+    }
 
-                function insignias100() {
+    function insignias100() {
 
-                    arrayClaseSelected.insignias = arrayClaseSelected.insignias + 100;
+        arrayClaseSelected.insignias = arrayClaseSelected.insignias + 100;
 
-                }
+    }
 
-                function healLoad() {
+    function healLoad() {
 
-                    let healthBarFill = document.querySelector('.health-bar-fill');
-                    let healthBarText = document.querySelector('.health-bar-text');
-                    let healthBarTotal = document.querySelector('.health-bar-total');
+        let healthBarFill = document.querySelector('.health-bar-fill');
+        let healthBarText = document.querySelector('.health-bar-text');
+        let healthBarTotal = document.querySelector('.health-bar-total');
 
-                    function updateHealthBar(currentHealth, totalHealth) {
+        function updateHealthBar(currentHealth, totalHealth) {
 
-                        currentHealth = Math.min(currentHealth, totalHealth);
+            currentHealth = Math.min(currentHealth, totalHealth);
 
-                        let healthPercent = Math.round(currentHealth / totalHealth * 100);
+            let healthPercent = Math.round(currentHealth / totalHealth * 100);
 
-                        healthBarFill.style.width = healthPercent + '%';
+            healthBarFill.style.width = healthPercent + '%';
 
-                        healthBarText.textContent = currentHealth;
+            healthBarText.textContent = currentHealth;
 
-                        healthBarTotal.textContent = '/' + totalHealth;
+            healthBarTotal.textContent = '/' + totalHealth;
+        }
+
+
+        updateHealthBar(arrayClaseSelected.vidaAct, arrayClaseSelected.vidaMax);
+
+    }
+
+    attackNumMsg();
+    potsNumMsg();
+    healLoad();
+
+    buySelectors.forEach((selector) => {
+
+        selector.addEventListener('click', (event) => {
+
+            const selectedItem = event.target;
+            selectedId = selectedItem.id;
+
+            if (selectedId === 'healP') {
+
+                if (arrayClaseSelected.pots > 0) {
+
+                    if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
+
+                        return;
+
+                    } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
+
+                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
+                    } else {
+
+                        arrayClaseSelected.vidaAct += 100;
                     }
 
-
-                    updateHealthBar(arrayClaseSelected.vidaAct, arrayClaseSelected.vidaMax);
-
+                    potUsed();
+                    potsNumMsg();
+                    healLoad();
+                    localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
                 }
+            }
+
+        })
+    });
+
+    const shopSelector = document.getElementById("shopSelector");
+
+    shopSelector.addEventListener('click', () => {
+
+        mainElement.innerHTML = menuShop;
+
+        attackNumMsg();
+        potsNumMsg();
+        healLoad();
+
+        const buySelectors = document.querySelectorAll('.btnInt');
+
+        buySelectors.forEach((selector) => {
+            selector.addEventListener('click', (event) => {
+
+                const selectedItem = event.target;
+                selectedId = selectedItem.id;
+
+                if (selectedId === 'healtBuy') {
+
+                    if (arrayClaseSelected.insignias >= 10) {
+
+                        arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
+                        arrayClaseSelected.vidaMax = arrayClaseSelected.vidaMax + 50;
+                        healLoad();
+                        insigniasMsg();
+                    }
+
+                } else if (selectedId === 'attackBuy') {
+
+                    if (arrayClaseSelected.insignias >= 10) {
+
+                        arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
+                        arrayClaseSelected.damage = arrayClaseSelected.damage + 50;
+                        attackNumMsg();
+                        insigniasMsg();
+                    }
+
+                } else if (selectedId === 'potiBuy') {
+
+                    if (arrayClaseSelected.insignias >= 10) {
+
+                        arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
+                        arrayClaseSelected.pots = arrayClaseSelected.pots + 1;
+                        potsNumMsg();
+                        insigniasMsg();
+                    }
+
+                } else if (selectedId === 'healP') {
+
+                    if (arrayClaseSelected.pots > 0) {
+
+                        if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
+
+                            return;
+
+                        } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
+
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
+                        } else {
+
+                            arrayClaseSelected.vidaAct += 100;
+                        }
+
+                        potUsed();
+                        healLoad();
+                        potsNumMsg();
+                    }
+                }
+
+                else if (selectedId === 'backHome') {
+
+                    torre();
+                }
+
+                localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+            })
+        });
+
+    });
+
+    const expSelector = document.getElementById("expSelector");
+
+    expSelector.addEventListener('click', () => {
+
+        mainElement.innerHTML = menuExp;
+
+        attackNumMsg();
+        potsNumMsg();
+        healLoad();
+
+        const buySelectors = document.querySelectorAll('.btnInt');
+
+        buySelectors.forEach((selector) => {
+            selector.addEventListener('click', (event) => {
+
+                const selectedItem = event.target;
+                selectedId = selectedItem.id;
+
+                if (selectedId === 'healP') {
+
+                    if (arrayClaseSelected.pots > 0) {
+
+                        if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
+
+                            return;
+
+                        } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
+
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
+                        } else {
+
+                            arrayClaseSelected.vidaAct += 100;
+                        }
+
+                        potUsed();
+                        healLoad();
+                        potsNumMsg();
+                    }
+                }
+
+                else if (selectedId === 'backHome') {
+
+                    torre();
+                }
+
+                localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+            })
+        });
+
+        const bossSelector = document.getElementById("bossSelector");
+
+        bossSelector.addEventListener('click', () => {
+
+            mainElement.innerHTML = bossMenu;
+
+            attackNumMsg();
+            potsNumMsg();
+            healLoad();
+
+            let enemyHealtMax = 99999;
+            let enemyHealt = 99999;
+            let enemyDamage = 100;
+
+            function enemyhealLoad() {
+
+                let healthBarFillEnemy = document.querySelector('.health-bar-fill-enemy');
+                let healthBarTextEnemy = document.querySelector('.health-bar-text-enemy');
+                let healthBarTotalEnemy = document.querySelector('.health-bar-total-enemy');
+
+                function updateHealthBarEnemy(currentHealth, totalHealth) {
+
+                    currentHealth = Math.min(currentHealth, totalHealth);
+
+                    let healthPercent = Math.round(currentHealth / totalHealth * 100);
+
+                    healthBarFillEnemy.style.width = healthPercent + '%';
+
+                    healthBarTextEnemy.textContent = currentHealth;
+
+                    healthBarTotalEnemy.textContent = '/' + totalHealth;
+                }
+
+                updateHealthBarEnemy(enemyHealt, enemyHealtMax);
+            }
+
+            enemyhealLoad();
+
+            const itemSelectors = document.querySelectorAll('.items');
+            const combatLog = document.querySelector('.combatLog');
+
+            itemSelectors.forEach((selector) => {
+                selector.addEventListener('click', (event) => {
+
+                    const selectedItem = event.target;
+                    selectedId = selectedItem.id;
+
+                    if (selectedId === 'attack') {
+
+                        numeroAleatorio();
+
+                        if (numeroAleatorio() > 7) {
+
+                            combatLog.textContent = `Le haz realizado un golpe critico ${arrayClaseSelected.damage * 2} Savathun, Savathun ataca! te quito ${enemyDamage} de vida`;
+                            enemyHealt = enemyHealt - (arrayClaseSelected.damage * 2);
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
+
+                            attackNumMsg();
+                            potsNumMsg();
+                            healLoad();
+                            enemyhealLoad();
+
+                        } else if (numeroAleatorio() > 3) {
+
+
+                            combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage} Savathun! Savathun ataca! te quito ${enemyDamage} de vida`;
+                            enemyHealt = enemyHealt - arrayClaseSelected.damage;
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
+
+                            attackNumMsg();
+                            potsNumMsg();
+                            healLoad();
+                            enemyhealLoad();
+
+                        } else {
+
+
+                            combatLog.textContent = `Savathun a usado un escudo y te a negado tu daño Savathun ataca! te quito ${enemyDamage} de vida`;
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
+
+                            attackNumMsg();
+                            potsNumMsg();
+                            healLoad();
+                            enemyhealLoad();
+                        }
+
+                        localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+                    } else if (selectedId === 'defense') {
+
+
+                        numeroAleatorio();
+
+                        if (numeroAleatorio() > 7) {
+
+
+                            combatLog.textContent = `Haz bloqueado con exito un golpe y le haz realizado ${arrayClaseSelected.damage} Savathun! Regeneras 20 de vida!`;
+                            enemyHealt = enemyHealt - arrayClaseSelected.damage;
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 20;
+
+                            attackNumMsg();
+                            potsNumMsg();
+                            healLoad();
+                            enemyhealLoad();
+
+                        } else if (numeroAleatorio() > 3) {
+
+                            combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage / 2} Savathun! Bloqueas el Ataque dSavathun y te curas 10 de vida!`;
+                            enemyHealt = enemyHealt - (arrayClaseSelected.damage / 2);
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 10;
+
+                            attackNumMsg();
+                            potsNumMsg();
+                            healLoad();
+                            enemyhealLoad();
+
+                        } else {
+
+                            combatLog.textContent = `Savathun te esquiva y te hace daño critico! Savathun ataca y te quita ${enemyDamage * 2} de vida `;
+                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - (enemyDamage * 2);
+
+                            attackNumMsg();
+                            potsNumMsg();
+                            healLoad();
+                            enemyhealLoad();
+                        }
+
+                        localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+                    } else if (selectedId === 'healP') {
+
+                        if (arrayClaseSelected.pots > 0) {
+
+                            if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
+
+                                combatLog.textContent = `No puedes curarte`;
+                                return;
+
+                            } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
+
+                                combatLog.textContent = `Te haz curado`;
+                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
+                            } else {
+                                combatLog.textContent = `Te haz curado`;
+                                arrayClaseSelected.vidaAct += 100;
+                            }
+
+                            potUsed()
+                            attackNumMsg();
+                            potsNumMsg();
+                            healLoad();
+                            enemyhealLoad();
+                        }
+
+                        localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+                    }
+                    else if (selectedId === 'backHome') {
+
+                        torre();
+                    }
+
+                    localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+                    if (arrayClaseSelected.vidaAct < 1) { localStorage.clear(); mainElement.innerHTML = dead; } if (enemyHealt <= 0) {
+                        localStorage.clear(); mainElement.innerHTML = creditos;
+                    }
+                })
+            });
+        }); const
+            incursionSelector = document.getElementById("incursionSelector"); incursionSelector.addEventListener('click', () => {
+
+                mainElement.innerHTML = incursionMenu;
 
                 attackNumMsg();
                 potsNumMsg();
                 healLoad();
 
-                buySelectors.forEach((selector) => {
+                let enemyHealtMax = 1000;
+                let enemyHealt = 1000;
+                let enemyDamage = 10;
 
+                function enemyhealLoad() {
+
+                    let healthBarFillEnemy = document.querySelector('.health-bar-fill-enemy');
+                    let healthBarTextEnemy = document.querySelector('.health-bar-text-enemy');
+                    let healthBarTotalEnemy = document.querySelector('.health-bar-total-enemy');
+
+                    function updateHealthBarEnemy(currentHealth, totalHealth) {
+
+                        currentHealth = Math.min(currentHealth, totalHealth);
+
+                        let healthPercent = Math.round(currentHealth / totalHealth * 100);
+
+                        healthBarFillEnemy.style.width = healthPercent + '%';
+
+                        healthBarTextEnemy.textContent = currentHealth;
+
+                        healthBarTotalEnemy.textContent = '/' + totalHealth;
+                    }
+
+                    updateHealthBarEnemy(enemyHealt, enemyHealtMax);
+                }
+
+                enemyhealLoad();
+
+                const itemSelectors = document.querySelectorAll('.items');
+                const combatLog = document.querySelector('.combatLog');
+
+                itemSelectors.forEach((selector) => {
                     selector.addEventListener('click', (event) => {
 
                         const selectedItem = event.target;
                         selectedId = selectedItem.id;
 
-                        if (selectedId === 'healP') {
+                        if (selectedId === 'attack') {
+
+                            numeroAleatorio();
+
+                            if (numeroAleatorio() > 7) {
+
+                                combatLog.textContent = `Le haz realizado un golpe critico ${arrayClaseSelected.damage * 2} El Caval, El Caval ataca! te quito ${enemyDamage} de vida`;
+                                enemyHealt = enemyHealt - (arrayClaseSelected.damage * 2);
+                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
+
+                                attackNumMsg();
+                                potsNumMsg();
+                                healLoad();
+                                enemyhealLoad();
+
+                            } else if (numeroAleatorio() > 3) {
+
+
+                                combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage} El Caval! El Caval ataca! te quito ${enemyDamage} de vida`;
+                                enemyHealt = enemyHealt - arrayClaseSelected.damage;
+                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
+
+                                attackNumMsg();
+                                potsNumMsg();
+                                healLoad();
+                                enemyhealLoad();
+
+                            } else {
+
+
+                                combatLog.textContent = `El Caval a usado un escudo y te a negado tu daño El Caval ataca! te quito ${enemyDamage} de vida`;
+                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
+
+                                attackNumMsg();
+                                potsNumMsg();
+                                healLoad();
+                                enemyhealLoad();
+                            }
+
+                            localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+                        } else if (selectedId === 'defense') {
+
+
+                            numeroAleatorio();
+
+                            if (numeroAleatorio() > 7) {
+
+
+                                combatLog.textContent = `Haz bloqueado con exito un golpe y le haz realizado ${arrayClaseSelected.damage} El Caval! Regeneras 20 de vida!`;
+                                enemyHealt = enemyHealt - arrayClaseSelected.damage;
+                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 20;
+
+                                attackNumMsg();
+                                potsNumMsg();
+                                healLoad();
+                                enemyhealLoad();
+
+                            } else if (numeroAleatorio() > 3) {
+
+                                combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage / 2} El Caval! Bloqueas el Ataque de El Caval y te curas 10 de vida!`;
+                                enemyHealt = enemyHealt - (arrayClaseSelected.damage / 2);
+                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 10;
+
+                                attackNumMsg();
+                                potsNumMsg();
+                                healLoad();
+                                enemyhealLoad();
+
+                            } else {
+
+                                combatLog.textContent = `El Caval te esquiva y te hace daño critico! El Caval ataca y te quita ${enemyDamage *
+                                    2} de vida `;
+                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - (enemyDamage * 2);
+
+                                attackNumMsg();
+                                potsNumMsg();
+                                healLoad();
+                                enemyhealLoad();
+                            }
+
+                            localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+
+                        } else if (selectedId === 'healP') {
 
                             if (arrayClaseSelected.pots > 0) {
 
                                 if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
 
+                                    combatLog.textContent = `No puedes curarte`;
                                     return;
 
                                 } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
 
+                                    combatLog.textContent = `Te haz curado`;
                                     arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
                                 } else {
-
+                                    combatLog.textContent = `Te haz curado`;
                                     arrayClaseSelected.vidaAct += 100;
                                 }
 
-                                potUsed();
+                                potUsed()
+                                attackNumMsg();
                                 potsNumMsg();
                                 healLoad();
+                                enemyhealLoad();
                             }
+
+                            localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+                        }
+                        else if (selectedId === 'backHome') {
+
+                            torre();
                         }
 
+                        if (arrayClaseSelected.vidaAct < 1) { localStorage.clear(); mainElement.innerHTML = dead; }
+                        if (enemyHealt <= 0) {
+
+                            mainElement.innerHTML = reward + mainElement.innerHTML;
+                        
+                            const rewardBtn = document.getElementById("reward");
+
+                            rewardBtn.addEventListener("click", function () {
+
+                                    insignias100();
+                                    localStorage.setItem("arrayClaseSelected", JSON.stringify(arrayClaseSelected));
+                                    torre();
+                                
+                            });
+
+                        }
                     })
                 });
-
-                const shopSelector = document.getElementById("shopSelector");
-
-                shopSelector.addEventListener('click', () => {
-
-                    mainElement.innerHTML = menuShop;
-
-                    attackNumMsg();
-                    potsNumMsg();
-                    healLoad();
-
-                    const buySelectors = document.querySelectorAll('.btnInt');
-
-                    buySelectors.forEach((selector) => {
-                        selector.addEventListener('click', (event) => {
-
-                            const selectedItem = event.target;
-                            selectedId = selectedItem.id;
-
-                            if (selectedId === 'healtBuy') {
-
-                                if (arrayClaseSelected.insignias >= 10) {
-
-                                    arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
-                                    arrayClaseSelected.vidaMax = arrayClaseSelected.vidaMax + 50;
-                                    healLoad();
-                                    insigniasMsg();
-                                }
-
-                            } else if (selectedId === 'attackBuy') {
-
-                                if (arrayClaseSelected.insignias >= 10) {
-
-                                    arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
-                                    arrayClaseSelected.damage = arrayClaseSelected.damage + 50;
-                                    attackNumMsg();
-                                    insigniasMsg();
-                                }
-
-                            } else if (selectedId === 'potiBuy') {
-
-                                if (arrayClaseSelected.insignias >= 10) {
-
-                                    arrayClaseSelected.insignias = arrayClaseSelected.insignias - 10;
-                                    arrayClaseSelected.pots = arrayClaseSelected.pots + 1;
-                                    potsNumMsg();
-                                    insigniasMsg();
-                                }
-
-                            } else if (selectedId === 'healP') {
-
-                                if (arrayClaseSelected.pots > 0) {
-
-                                    if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
-
-                                        return;
-
-                                    } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
-
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
-                                    } else {
-
-                                        arrayClaseSelected.vidaAct += 100;
-                                    }
-
-                                    potUsed();
-                                    healLoad();
-                                    potsNumMsg();
-                                }
-                            }
-
-                            else if (selectedId === 'backHome') {
-
-                                torre();
-                            }
-
-                        })
-                    });
-
-                });
-
-                const expSelector = document.getElementById("expSelector");
-
-                expSelector.addEventListener('click', () => {
-
-                    mainElement.innerHTML = menuExp;
-
-                    attackNumMsg();
-                    potsNumMsg();
-                    healLoad();
-
-                    const buySelectors = document.querySelectorAll('.btnInt');
-
-                    buySelectors.forEach((selector) => {
-                        selector.addEventListener('click', (event) => {
-
-                            const selectedItem = event.target;
-                            selectedId = selectedItem.id;
-
-                            if (selectedId === 'healP') {
-
-                                if (arrayClaseSelected.pots > 0) {
-
-                                    if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
-
-                                        return;
-
-                                    } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
-
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
-                                    } else {
-
-                                        arrayClaseSelected.vidaAct += 100;
-                                    }
-
-                                    potUsed();
-                                    healLoad();
-                                    potsNumMsg();
-                                }
-                            }
-
-                            else if (selectedId === 'backHome') {
-
-                                torre();
-                            }
-
-                        })
-                    });
-
-                    const bossSelector = document.getElementById("bossSelector");
-
-                    bossSelector.addEventListener('click', () => {
-
-                        mainElement.innerHTML = bossMenu;
-
-                        attackNumMsg();
-                        potsNumMsg();
-                        healLoad();
-
-                        let enemyHealtMax = 99999;
-                        let enemyHealt = 99999;
-                        let enemyDamage = 100;
-
-                        function enemyhealLoad() {
-
-                            let healthBarFillEnemy = document.querySelector('.health-bar-fill-enemy');
-                            let healthBarTextEnemy = document.querySelector('.health-bar-text-enemy');
-                            let healthBarTotalEnemy = document.querySelector('.health-bar-total-enemy');
-
-                            function updateHealthBarEnemy(currentHealth, totalHealth) {
-
-                                currentHealth = Math.min(currentHealth, totalHealth);
-
-                                let healthPercent = Math.round(currentHealth / totalHealth * 100);
-
-                                healthBarFillEnemy.style.width = healthPercent + '%';
-
-                                healthBarTextEnemy.textContent = currentHealth;
-
-                                healthBarTotalEnemy.textContent = '/' + totalHealth;
-                            }
-
-                            updateHealthBarEnemy(enemyHealt, enemyHealtMax);
-                        }
-
-                        enemyhealLoad();
-
-                        const itemSelectors = document.querySelectorAll('.items');
-                        const combatLog = document.querySelector('.combatLog');
-
-                        itemSelectors.forEach((selector) => {
-                            selector.addEventListener('click', (event) => {
-
-                                const selectedItem = event.target;
-                                selectedId = selectedItem.id;
-
-                                if (selectedId === 'attack') {
-
-                                    numeroAleatorio();
-
-                                    if (numeroAleatorio() > 7) {
-
-                                        combatLog.textContent = `Le haz realizado un golpe critico ${arrayClaseSelected.damage * 2} Savathun, Savathun ataca! te quito ${enemyDamage} de vida`;
-                                        enemyHealt = enemyHealt - (arrayClaseSelected.damage * 2);
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
-
-                                        attackNumMsg();
-                                        potsNumMsg();
-                                        healLoad();
-                                        enemyhealLoad();
-
-                                    } else if (numeroAleatorio() > 3) {
-
-
-                                        combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage} Savathun! Savathun ataca! te quito ${enemyDamage} de vida`;
-                                        enemyHealt = enemyHealt - arrayClaseSelected.damage;
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
-
-                                        attackNumMsg();
-                                        potsNumMsg();
-                                        healLoad();
-                                        enemyhealLoad();
-
-                                    } else {
-
-
-                                        combatLog.textContent = `Savathun a usado un escudo y te a negado tu daño Savathun ataca! te quito ${enemyDamage} de vida`;
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
-
-                                        attackNumMsg();
-                                        potsNumMsg();
-                                        healLoad();
-                                        enemyhealLoad();
-                                    }
-
-                                } else if (selectedId === 'defense') {
-
-
-                                    numeroAleatorio();
-
-                                    if (numeroAleatorio() > 7) {
-
-
-                                        combatLog.textContent = `Haz bloqueado con exito un golpe y le haz realizado ${arrayClaseSelected.damage} Savathun! Regeneras 20 de vida!`;
-                                        enemyHealt = enemyHealt - arrayClaseSelected.damage;
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 20;
-
-                                        attackNumMsg();
-                                        potsNumMsg();
-                                        healLoad();
-                                        enemyhealLoad();
-
-                                    } else if (numeroAleatorio() > 3) {
-
-                                        combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage / 2} Savathun! Bloqueas el Ataque dSavathun y te curas 10 de vida!`;
-                                        enemyHealt = enemyHealt - (arrayClaseSelected.damage / 2);
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 10;
-
-                                        attackNumMsg();
-                                        potsNumMsg();
-                                        healLoad();
-                                        enemyhealLoad();
-
-                                    } else {
-
-                                        combatLog.textContent = `Savathun te esquiva y te hace daño critico! Savathun ataca y te quita ${enemyDamage * 2} de vida `;
-                                        arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - (enemyDamage * 2);
-
-                                        attackNumMsg();
-                                        potsNumMsg();
-                                        healLoad();
-                                        enemyhealLoad();
-                                    }
-
-                                } else if (selectedId === 'healP') {
-
-                                    if (arrayClaseSelected.pots > 0) {
-
-                                        if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
-
-                                            combatLog.textContent = `No puedes curarte`;
-                                            return;
-
-                                        } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
-
-                                            combatLog.textContent = `Te haz curado`;
-                                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
-                                        } else {
-                                            combatLog.textContent = `Te haz curado`;
-                                            arrayClaseSelected.vidaAct += 100;
-                                        }
-
-                                        potUsed()
-                                        attackNumMsg();
-                                        potsNumMsg();
-                                        healLoad();
-                                        enemyhealLoad();
-                                    }
-                                }
-                                else if (selectedId === 'backHome') {
-
-                                    torre();
-                                }
-
-                                if (arrayClaseSelected.vidaAct < 1) { mainElement.innerHTML = dead; } if (enemyHealt <= 0) {
-                                    mainElement.innerHTML = creditos;
-                                }
-                            })
-                        });
-                    }); const
-                        incursionSelector = document.getElementById("incursionSelector"); incursionSelector.addEventListener('click', () => {
-
-                            mainElement.innerHTML = incursionMenu;
-
-                            attackNumMsg();
-                            potsNumMsg();
-                            healLoad();
-
-                            let enemyHealtMax = 1000;
-                            let enemyHealt = 1000;
-                            let enemyDamage = 10;
-
-                            function enemyhealLoad() {
-
-                                let healthBarFillEnemy = document.querySelector('.health-bar-fill-enemy');
-                                let healthBarTextEnemy = document.querySelector('.health-bar-text-enemy');
-                                let healthBarTotalEnemy = document.querySelector('.health-bar-total-enemy');
-
-                                function updateHealthBarEnemy(currentHealth, totalHealth) {
-
-                                    currentHealth = Math.min(currentHealth, totalHealth);
-
-                                    let healthPercent = Math.round(currentHealth / totalHealth * 100);
-
-                                    healthBarFillEnemy.style.width = healthPercent + '%';
-
-                                    healthBarTextEnemy.textContent = currentHealth;
-
-                                    healthBarTotalEnemy.textContent = '/' + totalHealth;
-                                }
-
-                                updateHealthBarEnemy(enemyHealt, enemyHealtMax);
-                            }
-
-                            enemyhealLoad();
-
-                            const itemSelectors = document.querySelectorAll('.items');
-                            const combatLog = document.querySelector('.combatLog');
-
-                            itemSelectors.forEach((selector) => {
-                                selector.addEventListener('click', (event) => {
-
-                                    const selectedItem = event.target;
-                                    selectedId = selectedItem.id;
-
-                                    if (selectedId === 'attack') {
-
-                                        numeroAleatorio();
-
-                                        if (numeroAleatorio() > 7) {
-
-                                            combatLog.textContent = `Le haz realizado un golpe critico ${arrayClaseSelected.damage * 2} El Caval, El Caval ataca! te quito ${enemyDamage} de vida`;
-                                            enemyHealt = enemyHealt - (arrayClaseSelected.damage * 2);
-                                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
-
-                                            attackNumMsg();
-                                            potsNumMsg();
-                                            healLoad();
-                                            enemyhealLoad();
-
-                                        } else if (numeroAleatorio() > 3) {
-
-
-                                            combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage} El Caval! El Caval ataca! te quito ${enemyDamage} de vida`;
-                                            enemyHealt = enemyHealt - arrayClaseSelected.damage;
-                                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
-
-                                            attackNumMsg();
-                                            potsNumMsg();
-                                            healLoad();
-                                            enemyhealLoad();
-
-                                        } else {
-
-
-                                            combatLog.textContent = `El Caval a usado un escudo y te a negado tu daño El Caval ataca! te quito ${enemyDamage} de vida`;
-                                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - enemyDamage;
-
-                                            attackNumMsg();
-                                            potsNumMsg();
-                                            healLoad();
-                                            enemyhealLoad();
-                                        }
-
-                                    } else if (selectedId === 'defense') {
-
-
-                                        numeroAleatorio();
-
-                                        if (numeroAleatorio() > 7) {
-
-
-                                            combatLog.textContent = `Haz bloqueado con exito un golpe y le haz realizado ${arrayClaseSelected.damage} El Caval! Regeneras 20 de vida!`;
-                                            enemyHealt = enemyHealt - arrayClaseSelected.damage;
-                                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 20;
-
-                                            attackNumMsg();
-                                            potsNumMsg();
-                                            healLoad();
-                                            enemyhealLoad();
-
-                                        } else if (numeroAleatorio() > 3) {
-
-                                            combatLog.textContent = `Le haz infligido ${arrayClaseSelected.damage / 2} El Caval! Bloqueas el Ataque de El Caval y te curas 10 de vida!`;
-                                            enemyHealt = enemyHealt - (arrayClaseSelected.damage / 2);
-                                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct + 10;
-
-                                            attackNumMsg();
-                                            potsNumMsg();
-                                            healLoad();
-                                            enemyhealLoad();
-
-                                        } else {
-
-                                            combatLog.textContent = `El Caval te esquiva y te hace daño critico! El Caval ataca y te quita ${enemyDamage *
-                                                2} de vida `;
-                                            arrayClaseSelected.vidaAct = arrayClaseSelected.vidaAct - (enemyDamage * 2);
-
-                                            attackNumMsg();
-                                            potsNumMsg();
-                                            healLoad();
-                                            enemyhealLoad();
-                                        }
-
-                                    } else if (selectedId === 'healP') {
-
-                                        if (arrayClaseSelected.pots > 0) {
-
-                                            if (arrayClaseSelected.vidaAct >= arrayClaseSelected.vidaMax) {
-
-                                                combatLog.textContent = `No puedes curarte`;
-                                                return;
-
-                                            } else if (arrayClaseSelected.vidaAct + 100 > arrayClaseSelected.vidaMax) {
-
-                                                combatLog.textContent = `Te haz curado`;
-                                                arrayClaseSelected.vidaAct = arrayClaseSelected.vidaMax;
-                                            } else {
-                                                combatLog.textContent = `Te haz curado`;
-                                                arrayClaseSelected.vidaAct += 100;
-                                            }
-
-                                            potUsed()
-                                            attackNumMsg();
-                                            potsNumMsg();
-                                            healLoad();
-                                            enemyhealLoad();
-                                        }
-                                    }
-                                    else if (selectedId === 'backHome') {
-
-                                        torre();
-                                    }
-
-                                    if (arrayClaseSelected.vidaAct < 1) { mainElement.innerHTML = dead; } if (enemyHealt <= 0) {
-                                        combatLog.textContent = `Haz derrotado al enemigo, haz ganado 100 insignias.`;
-                                        console.log(arrayClaseSelected.insignias); insignias100(); torre();
-                                    }
-                                })
-                            });
-                        });
-                });
-            };
-        });
+            });
     });
-});
+};
